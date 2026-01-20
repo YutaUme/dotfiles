@@ -17,7 +17,7 @@ config.color_scheme = 'Tokyo Night Moon'
 config.use_ime = true
 
 -- ウィンドウに関する設定
-config.window_background_opacity = 0.75
+config.window_background_opacity = 0.85
 config.window_decorations = "RESIZE" -- タイトルバー削除
 
 -- タブバーの設定

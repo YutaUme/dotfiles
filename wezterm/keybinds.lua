@@ -73,7 +73,7 @@ return {
 
         if current == 0 then
           overrides.macos_window_background_blur = 50
-          overrides.window_background_opacity = 0.75
+          overrides.window_background_opacity = 0.85
         else
           overrides.macos_window_background_blur = 0
           overrides.window_background_opacity = 0.60
@@ -131,6 +131,25 @@ return {
     -- { key = 'phys:Space', mods = 'SHIFT|CTRL', action = act.QuickSelect },
     -- { key = 'PageUp', mods = 'SHIFT', action = act.ScrollByPage(-1) },
     -- { key = 'PageDown', mods = 'SHIFT', action = act.ScrollByPage(1) },
+    {
+      key = 'Enter',
+      mods = 'SHIFT',
+      action = wezterm.action_callback(function(window, pane)
+        local proc = pane:get_foreground_process_name()
+        -- プロセス名に 'codex' が含まれているか判定
+        -- nilチェックと小文字化を行うとより確実です
+        if proc and proc:lower():find('codex') then
+          -- codex実行時は改行コード（例：Ctrl+j）を送信
+          window:perform_action(act.SendKey { key = 'j', mods = 'CTRL' }, pane)
+        else
+          -- codex以外の時は、本来の「Shift+Enter」をそのまま送信
+          -- callbackの中で自分自身と同じキーを送るのではなく、
+          -- SendStringで生の改行コードを送るか、あるいは単純なkey assignmentに戻します。
+          window:perform_action(act.SendKey { key = 'Enter', mods = 'SHIFT' }, pane)
+        end
+      end),
+    },
+
   },
 
   key_tables = {
