@@ -40,6 +40,12 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
   }
 end)
 
+config.foreground_text_hsb = {
+  hue = 1.0,       -- 色相
+  saturation = 1.1, -- 彩度
+  brightness = 1.2, -- 明るさ
+}
+
 -- アクティブなペインの枠線を強調表示
 config.inactive_pane_hsb = {
   saturation = 0.9, -- 彩度
