@@ -183,7 +183,7 @@ return {
 					-- codex以外の時は、本来の「Shift+Enter」をそのまま送信
 					-- callbackの中で自分自身と同じキーを送るのではなく、
 					-- SendStringで生の改行コードを送るか、あるいは単純なkey assignmentに戻します。
-					window:perform_action(act.SendKey({ key = "Enter", mods = "SHIFT" }), pane)
+					window:perform_action(act.SendString("\r"), pane)
 				end
 			end),
 		},
