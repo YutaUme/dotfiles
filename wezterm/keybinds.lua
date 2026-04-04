@@ -4,48 +4,6 @@ local act = wezterm.action
 return {
 	keys = {
 		--================
-		-- workspace関連
-		--================
-		{
-			mods = "LEADER",
-			key = "w",
-			action = act.ShowLauncherArgs({ flags = "WORKSPACES", title = "Select workspace" }),
-		},
-
-		{
-			-- Rename workspace
-			mods = "LEADER",
-			key = "$",
-			action = act.PromptInputLine({
-				description = "(wezterm) Set workspace title:",
-				action = wezterm.action_callback(function(win, pane, line)
-					if line then
-						wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
-					end
-				end),
-			}),
-		},
-
-		{
-			-- Create new workspace
-			mods = "LEADER|SHIFT",
-			key = "W",
-			action = act.PromptInputLine({
-				description = "(wezterm) Create new workspace:",
-				action = wezterm.action_callback(function(window, pane, line)
-					if line then
-						window:perform_action(
-							act.SwitchToWorkspace({
-								name = line,
-							}),
-							pane
-						)
-					end
-				end),
-			}),
-		},
-
-		--================
 		-- ウィンドウ関連
 		--================
 		{ key = "n", mods = "SUPER", action = act.SpawnWindow },
@@ -114,7 +72,7 @@ return {
 
 				if current == 0 then
 					overrides.macos_window_background_blur = 50
-					overrides.window_background_opacity = 0.85
+					overrides.window_background_opacity = 0.90
 				else
 					overrides.macos_window_background_blur = 0
 					overrides.window_background_opacity = 0.60
@@ -144,7 +102,6 @@ return {
 		-- コマンドパレット表示
 		{ key = "P", mods = "SHIFT|SUPER", action = act.ActivateCommandPalette },
 
-		-- デバッグオーバーレイ表示
 		{ key = "l", mods = "SHIFT|CTRL", action = act.ShowDebugOverlay },
 
 		-- コピー・ペースト
